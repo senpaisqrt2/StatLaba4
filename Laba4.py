@@ -3,7 +3,7 @@ from scipy.stats import pearsonr, t
 import matplotlib.pyplot as plt
 
 # Путь к файлу с исходными данными
-data_file_path = '/Статистика.txt'
+data_file_path = 'Статистика.txt'
 
 
 print('ЗАДАНИЕ 1')
