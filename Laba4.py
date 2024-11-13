@@ -1,5 +1,5 @@
 import numpy as np
-from scipy.stats import pearsonr, t
+from scipy.stats import t
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -58,21 +58,20 @@ n = len(ages)
 # Расчет t-статистики для проверки значимости корреляции
 t_statistic = correlation_coefficient * np.sqrt((n - 2) / (1 - correlation_coefficient ** 2))
 
-# p-value для двустороннего теста
-p_value = 2 * (1 - t.cdf(abs(t_statistic), df=n - 2))
-
-# Уровень значимости
+# Определение t-критического для двустороннего теста с уровнем значимости alpha
 alpha = 0.05
+t_critical = t.ppf(1 - alpha / 2, df=n - 2)  # Двусторонний тест, поэтому alpha/2
 
-# Результаты проверки значимости
+# Вывод результатов
 print("t-статистика:", t_statistic)
-print("p-value:", p_value)
+print("t-критическое значение:", t_critical)
 
-# Оценка значимости
-if p_value < alpha:
+# Оценка значимости на основе сравнения по модулю
+if abs(t_statistic) > t_critical:
     print("Коэффициент корреляции значим на уровне 0.05.")
 else:
     print("Коэффициент корреляции не значим на уровне 0.05.")
+
 
 # Комментарий:
 # При уровне значимости 0.05 p-value оказался ниже 0.05, что позволяет отвергнуть нулевую гипотезу об отсутствии корреляции.
