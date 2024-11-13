@@ -5,6 +5,26 @@ import matplotlib.pyplot as plt
 # Путь к файлу с исходными данными
 data_file_path = 'Статистика.txt'
 
+
+def pearson_correlation(x, y):
+    # Находим средние значения для x и y
+    mean_x = np.mean(x)
+    mean_y = np.mean(y)
+    print(mean_x, mean_y)
+
+    # Вычисляем числитель (сумма произведений отклонений)
+    numerator = np.sum((x - mean_x) * (y - mean_y))
+    print(numerator)
+
+    # Вычисляем знаменатель (произведение корней квадратов сумм квадратов отклонений)
+    denominator = np.sqrt(np.sum((x - mean_x) ** 2) * np.sum((y - mean_y) ** 2))
+    print(denominator)
+
+    # Возвращаем коэффициент корреляции Пирсона
+    print(numerator / denominator)
+    return numerator / denominator if denominator != 0 else 0
+
+
 print('ЗАДАНИЕ 1')
 # ЗАДАНИЕ 1
 # Считываем данные из файла и создаем списки age и crimes
@@ -13,20 +33,20 @@ with open(data_file_path, 'r') as file:
 
 # Сортировка и расчет частоты для каждого возраста
 element.sort()
-age = list(range(min(element), max(element) + 1))
+age = [i for i in range(14, 74) if i not in [68, 72]]  # Возрастной диапазон от 14 до 73, исключая 68 и 72
 crimes = [element.count(i) for i in age]
 
 # Преобразование списков в массивы для дальнейшего анализа
 ages = np.array(age)
 frequencies = np.array(crimes)
+print(ages, frequencies)
 
-# Расчет коэффициента линейной корреляции
-correlation_coefficient, _ = pearsonr(ages, frequencies)
+# Ручной расчет коэффициента корреляции Пирсона
+correlation_coefficient = pearson_correlation(ages, frequencies)
 print("Коэффициент линейной корреляции между возрастом и частотой преступлений:", correlation_coefficient)
-#пирсона посчитать ручками
 
 # Комментарий:
-# Коэффициент корреляции -0.61 указывает на умеренную отрицательную связь между возрастом и частотой преступлений.
+# Коэффициент корреляции -0.577 указывает на умеренную отрицательную связь между возрастом и частотой преступлений.
 # Это значит, что с увеличением возраста частота преступлений уменьшается.
 # Однако этот коэффициент показывает только линейную зависимость, поэтому он не учитывает возможных нелинейных связей.
 
