@@ -80,24 +80,24 @@ else:
 # -5.296
 #вывести не п значение, а т критическое и провести сравнение больше меньше по модулю, основной принцип проверки гипотез
 
-print('')
-print('')
-print('ЗАДАНИЕ 3 - на графике')# завершена
-
-# Построение корреляционного поля
-plt.scatter(ages, frequencies, color='orange', label='Данные')
-
-# Добавление трендовой линии
-z = np.polyfit(ages, frequencies, 1)  # Параметры для линейной регрессии
-p = np.poly1d(z)
-plt.plot(ages, p(ages), color='blue', linestyle='--', label='Линия тренда')
-
-plt.title('Корреляционное поле: Возраст преступника vs Частота преступлений')
-plt.xlabel('Возраст преступника')
-plt.ylabel('Частота преступлений')
-plt.legend()
-plt.grid(True)
-plt.show()
+# print('')
+# print('')
+# print('ЗАДАНИЕ 3 - на графике')# завершена
+#
+# # Построение корреляционного поля
+# plt.scatter(ages, frequencies, color='orange', label='Данные')
+#
+# # Добавление трендовой линии
+# z = np.polyfit(ages, frequencies, 1)  # Параметры для линейной регрессии
+# p = np.poly1d(z)
+# plt.plot(ages, p(ages), color='blue', linestyle='--', label='Линия тренда')
+#
+# plt.title('Корреляционное поле: Возраст преступника vs Частота преступлений')
+# plt.xlabel('Возраст преступника')
+# plt.ylabel('Частота преступлений')
+# plt.legend()
+# plt.grid(True)
+# plt.show()
 
 # # Комментарий:
 # # График корреляционного поля с добавленной трендовой линией визуализирует связь между возрастом и частотой преступлений.
@@ -167,10 +167,12 @@ inside_group = sum(grouped_variances * age_group_counts / age_group_counts.sum()
 # Межгрупповая дисперсия
 # Вычисляем межгрупповую дисперсию, которая оценивает, как средние возрастные значения в группах отличаются от общего среднего по всем данным.
 outside_group = sum(((grouped_means - mean_value) ** 2) * age_group_counts / age_group_counts.sum())
+print(outside_group)
 
 # Общая дисперсия и корреляционное отношение
 # Общая дисперсия является суммой внутригрупповой и межгрупповой дисперсий.
 com_variances = inside_group + outside_group
+print(com_variances)
 # Корреляционное отношение (η) вычисляется как квадратный корень из отношения межгрупповой дисперсии к общей дисперсии.
 n_var = (outside_group / com_variances) ** 0.5
 
